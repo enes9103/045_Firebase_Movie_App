@@ -2,32 +2,44 @@ import { initializeApp } from "firebase/app";
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDdVlW1A4L-K5dlxKet-vbM7Bn-sohq66k",
-    authDomain: "firstproject-288b4.firebaseapp.com",
-    projectId: "firstproject-288b4",
-    storageBucket: "firstproject-288b4.appspot.com",
-    messagingSenderId: "1014601001605",
-    appId: "1:1014601001605:web:3b03ba75caf5138c5817ec"
-};
-
+    apiKey: process.env.REACT_APP_apiKey,
+    authDomain: process.env.REACT_APP_authDomain,
+    projectId: process.env.REACT_APP_projectId,
+    storageBucket: process.env.REACT_APP_storageBucket,
+    messagingSenderId: process.env.REACT_APP_messagingSenderId,
+    appId: process.env.REACT_APP_appId,
+  };
+  // const firebaseConfig = {
+//     apiKey: "AIzaSyDdVlW1A4L-K5dlxKet-vbM7Bn-sohq66k",
+//     authDomain: "firstproject-288b4.firebaseapp.com",
+//     projectId: "firstproject-288b4",
+//     storageBucket: "firstproject-288b4.appspot.com",
+//     messagingSenderId: "1014601001605",
+//     appId: "1:1014601001605:web:3b03ba75caf5138c5817ec"
+// };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
 
-export const createUser = async (email, password, navigate) => {
+export const createUser = async (email, password, displayName, navigate) => {
   try {
     let userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
       password
     );
+    await updateProfile(auth.currentUser, {
+      displayName: displayName,
+    });
     navigate("/");
     console.log(userCredential);
   } catch (err) {
@@ -35,6 +47,8 @@ export const createUser = async (email, password, navigate) => {
   }
 };
 
+//* https://console.firebase.google.com/
+//* => Authentication => sign-in-method => enable Email/password
 export const signIn = async (email, password, navigate) => {
   try {
     let userCredential = await signInWithEmailAndPassword(
@@ -52,4 +66,14 @@ export const signIn = async (email, password, navigate) => {
 export const logOut = () => {
   signOut(auth);
   alert("logged out successfully");
+};
+
+export const userObserver = () => {
+  onAuthStateChanged(auth, (currentUser) => {
+    if (user) {
+      setCurrentUser(currentUser);
+    } else {
+      setCurrentUser(false);
+    }
+    });
 };
