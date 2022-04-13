@@ -1,15 +1,11 @@
-<p>Clarusway<img align="right"
-  src="https://secure.meetupstatic.com/photos/event/3/1/b/9/600_488352729.jpeg"  width="15px"></p>
+# Project : Movie App (RC-08)
 
-# Project-008 : Movie App (RC-08)
+## Project Outcome
+![Project gif](Animation.gif)
 
 ## Description
 
 Project aims to create a Movie App.
-
-## Problem Statement
-
-- We are adding a new project to our portfolios. So you and your colleagues have started to work on the project.
 
 ## Project Skeleton
 
