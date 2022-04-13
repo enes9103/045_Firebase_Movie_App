@@ -3,8 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 const MovieDetail = () => {
-
-  const {id} = useParams();
+  const { id } = useParams();
   const [movieDetails, setMovieDetails] = useState();
   // const API_KEY = process.env.REACT_APP_TMDB_KEY;
   const API_KEY = "d6278b3dc3e6f8f8376a89851c3f8c8f";
@@ -55,7 +54,7 @@ const MovieDetail = () => {
                 <li className="list-group-item">
                   <Link to={-1} className="card-link">
                     Go Back
-                    </Link>
+                  </Link>
                 </li>
               </ul>
             </div>
